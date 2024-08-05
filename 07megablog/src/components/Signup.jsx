@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import authService from '../appwrite/outh.js'
+import service from '../appwrite/config.js'
 import {Link ,useNavigate} from 'react-router-dom'
 import {login} from '../store/authSlice'
-import {Button, Input, Logo} from './index.js'
+import {Button, Input, Logo} from './index.jsx'
 import {useDispatch} from 'react-redux'
 import {useForm} from 'react-hook-form'
 
-function Signup() {
+  function Signup() {
     const navigate = useNavigate()
     const [error, setError] = useState("")
     const dispatch = useDispatch()
@@ -15,9 +15,9 @@ function Signup() {
     const create = async(data) => {
         setError("")
         try {
-            const userData = await authService.createAccount(data)
+            const userData = await service.createAccount(data)
             if (userData) {
-                const userData = await authService.getCurrentUser()
+                const userData = await service.getCurrentUser()
                 if(userData) dispatch(login(userData));
                 navigate("/")
             }
@@ -85,4 +85,5 @@ function Signup() {
   )
 }
 
-export default Signup
+export default Signup ;
+
